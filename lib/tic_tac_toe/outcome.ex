@@ -3,9 +3,9 @@ defmodule TicTacToe.Outcome do
   def decide_outcome(%Tabletop.Board{turn: turn} = board) do
     cond do
       line_exists?(board) ->
-        Tabletop.Board.assign(board, %{outcome: :winner})
+        Tabletop.Board.assign(board, outcome: :winner)
       turn == 9 ->
-        Tabletop.Board.assign(board, %{outcome: :draw})
+        Tabletop.Board.assign(board, outcome: :draw)
       true ->
         board
     end

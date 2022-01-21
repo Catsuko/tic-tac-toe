@@ -41,7 +41,7 @@ defmodule TicTacToe.Turn do
 
   defp add_to_history(board, position) do
     history = Tabletop.Board.get(board, :history)
-    Tabletop.Board.assign(board, %{history: history ++ [position]})
+    Tabletop.Board.assign(board, history: history ++ [position])
   end
 
 end

@@ -11,14 +11,14 @@ defmodule TicTacToe.TurnTest do
 
     test "error when draw" do
       result = TicTacToe.fresh_board()
-        |> Tabletop.Board.assign(%{outcome: :draw})
+        |> Tabletop.Board.assign(outcome: :draw)
         |> TicTacToe.Turn.take_turn(TicTacToe.nought(), {0, 0})
       assert {:error, :game_over} = result
     end
 
     test "error winner is declared" do
       result = TicTacToe.fresh_board()
-        |> Tabletop.Board.assign(%{outcome: :winner})
+        |> Tabletop.Board.assign(outcome: :winner)
         |> TicTacToe.Turn.take_turn(TicTacToe.nought(), {0, 0})
       assert {:error, :game_over} = result
     end

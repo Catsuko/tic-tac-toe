@@ -12,7 +12,7 @@ defmodule TicTacToe do
   def fresh_board do
     Tabletop.Board.square(3)
       |> Tabletop.Board.add_effects(&TicTacToe.Outcome.decide_outcome/1)
-      |> Tabletop.Board.assign(%{history: [], outcome: :playing})
+      |> Tabletop.Board.assign(history: [], outcome: :playing)
   end
 
 end
