@@ -60,7 +60,7 @@ defmodule TicTacToe.Outcome do
   defp all_match?(path, target_piece) do
     matching = path
       |> Stream.take(3)
-      |> Enum.count(fn {_pos, piece} -> piece != nil and Tabletop.Piece.equal?(target_piece, piece) end)
+      |> Enum.count(fn {_pos, piece} -> Tabletop.Piece.equal?(piece, target_piece) end)
     matching == 3
   end
 
