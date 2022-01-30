@@ -49,8 +49,9 @@ defmodule TicTacToe.Outcome do
       or (Enum.all? 0..2, fn offset -> matching_piece?(board, piece, {offset, offset}) end)
   end
 
-  defp matching_piece?(board, %Tabletop.Piece{id: id}, position) do
-    Tabletop.occupied?(board, position) and Tabletop.get_piece(board, position).id == id
+  defp matching_piece?(board, piece, position) do
+    Tabletop.occupied?(board, position) and
+      Tabletop.Piece.equal?(Tabletop.get_piece(board, position), piece)
   end
 
 end
