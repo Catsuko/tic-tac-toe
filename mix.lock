@@ -1,3 +1,3 @@
 %{
-  "tabletop": {:hex, :tabletop, "0.1.2", "112079347f1ff84b6c605fcd6ea4c913d22d9ddc05d5db017ec0ccba3d7734f6", [:mix], [], "hexpm", "8894382cd9b0024b3015038800dcbd7014e7819e43566f083d66e2c4b1fc07dc"},
+  "tabletop": {:hex, :tabletop, "0.1.3", "9cfd10cf2391284f448c5a5db0359c8cabfa8653d35eee6affbb94f54780631c", [:mix], [], "hexpm", "ac513acf1bec9baf49201db83f05c3adf99f6625705e015a098cdad2b0b7bda7"},
 }

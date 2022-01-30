@@ -30,28 +30,38 @@ defmodule TicTacToe.Outcome do
     end
   end
 
-  defp line_exists_from?(board, last_move) do
-    horizontal_exists?(board, last_move) or
-      vertical_exists?(board, last_move) or
-      diagonal_exists?(board, last_move)
+  defp line_exists_from?(board, {piece, position}) do
+    horizontal_exists?(board, position, piece) or
+      vertical_exists?(board, position, piece) or
+      diagonal_left_exists?(board, piece) or
+      diagonal_right_exists?(board, piece)
   end
 
-  defp horizontal_exists?(board, {piece, {_x, y}}) do
-    Enum.all? 0..2, fn x -> matching_piece?(board, piece, {x, y}) end
+  defp horizontal_exists?(board, position, piece) do
+    Tabletop.travel(board, position, fn {x, y} -> {Integer.mod(x + 1, 3), y} end)
+      |> all_match?(piece)
   end
 
-  defp vertical_exists?(board, {piece, {x, _y}}) do
-    Enum.all? 0..2, fn y -> matching_piece?(board, piece, {x, y}) end
+  defp vertical_exists?(board, position, piece) do
+    Tabletop.travel(board, position, fn {x, y} -> {x, Integer.mod(y + 1, 3)} end)
+      |> all_match?(piece)
   end
 
-  defp diagonal_exists?(board, {piece, {_x, _y}}) do
-    (Enum.all? -1..1, fn offset -> matching_piece?(board, piece, {1 + offset, 1 - offset}) end)
-      or (Enum.all? 0..2, fn offset -> matching_piece?(board, piece, {offset, offset}) end)
+  defp diagonal_left_exists?(board, piece) do
+    Tabletop.travel(board, {0, 0}, fn {x, y} -> {x + 1, y + 1} end)
+      |> all_match?(piece)
   end
 
-  defp matching_piece?(board, piece, position) do
-    Tabletop.occupied?(board, position) and
-      Tabletop.Piece.equal?(Tabletop.get_piece(board, position), piece)
+  defp diagonal_right_exists?(board, piece) do
+    Tabletop.travel(board, {0, 2}, fn {x, y} -> {x + 1, y - 1} end)
+      |> all_match?(piece)
+  end
+
+  defp all_match?(path, target_piece) do
+    matching = path
+      |> Stream.take(3)
+      |> Enum.count(fn {_pos, piece} -> piece != nil and Tabletop.Piece.equal?(target_piece, piece) end)
+    matching == 3
   end
 
 end
